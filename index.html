@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motech Mining Portfolio</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        div {
+            background-color: #2b2b2b;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #ffd700;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin: 10px 0;
+            font-size: 16px;
+            display: block;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #888;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #mainPage {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s, transform 1s;
+        }
+
+        #depositAddress {
+            background-color: #4d4d4d;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        #balanceBox {
+            background-color: #0088cc;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #withdrawSection, #depositSection {
+            display: none;
+        }
+
+        #mainPage p, #mainPage button {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- صفحة تسجيل الدخول -->
+    <div id="loginPage">
+        <h2>تسجيل الدخول</h2>
+        <form>
+            <label for="gmail">البريد الإلكتروني:</label>
+            <input type="email" id="gmail" name="gmail" required>
+
+            <label for="username">اسم المستخدم:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">كلمة السر:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="button" onclick="login()">تسجيل الدخول</button>
+        </form>
+    </div>
+
+    <!-- صفحة الويب الرئيسية -->
+    <div id="mainPage">
+        <h2>مرحبًا، <span id="usernamePlaceholder"></span>!</h2>
+        <div>
+            <p>البريد الإلكتروني: <span id="emailPlaceholder"></span></p>
+            <p>اسم المستخدم: <span id="namePlaceholder"></span></p>
+
+            <!-- مربع الرصيد الإجمالي -->
+            <div id="balanceBox">الرصيد الإجمالي: 00 USDT</div>
+
+            <button id="withdrawButton" onclick="showWithdrawSection()">سحب</button>
+            <button id="depositButton" onclick="showDepositSection()">إيداع</button>
+
+            <div id="depositAddress" style="display:none;">
+                <p>عنوان الإيداع: TBY61zM6HX7hC2kdGyrEmD6XiRv1DoJiiT</p>
+            </div>
+
+            <div id="withdrawSection">
+                <label for="withdrawAmount">الكمية:</label>
+                <input type="text" id="withdrawAmount" name="withdrawAmount" required>
+
+                <label for="withdrawAddress">عنوان السحب:</label>
+                <input type="text" id="withdrawAddress" name="withdrawAddress" required>
+
+                <button onclick="confirmWithdraw()">تأكيد</button>
+            </div>
+
+            <div id="depositSection">
+                <label for="depositAmount">الكمية:</label>
+                <input type="text" id="depositAmount" name="depositAmount" required>
+
+                <label for="depositAddressInput">عنوان الإيداع:</label>
+                <input type="text" id="depositAddressInput" name="depositAddressInput" value="TBY61zM6HX7hC2kdGyrEmD6XiRv1DoJiiT" readonly>
+
+                <button onclick="confirmDeposit()">تأكيد</button>
+            </div>
+        </div>
+
+        <p>
+            استكشف قوة الاستثمار في خطط التعدين المبتكرة مع Motech. نقدم خيارات متنوعة تتناسب مع احتياجاتك المالية. ابدأ رحلتك نحو المستقبل المالي الآمن والمستدام، حيث يجمع Motech بين التكنولوجيا الفائقة والعائدات الجذابة. اختر الخطة التي تناسبك واستفد من تعدين العملات بطريقة فعالة ومربحة. استمتع بتجربة استثمار فريدة وتحكم في مستقبلك المالي.
+        </p>
+
+        <button id="plan1Button">الخطة 1: 10 USDT</button>
+        <button id="plan2Button">الخطة 2: 20 USDT</button>
+        <button id="plan3Button">الخطة 3: 30 USDT</button>
+        <button id="plan4Button">الخطة 4: 40 USDT</button>
+        <button id="plan5Button">الخطة 5: 50 USDT</button>
+        <button id="plan6Button">الخطة 6: 60 USDT</button>
+        <button id="plan7Button">الخطة 7: 70 USDT</button>
+    </div>
+
+    <script>
+        function login() {
+            let username = document.getElementById("username").value;
+            let email = document.getElementById("gmail").value;
+            document.getElementById("usernamePlaceholder").innerText = username;
+            document.getElementById("namePlaceholder").innerText = username;
+            document.getElementById("emailPlaceholder").innerText = email;
+
+            // تحويل صفحة تسجيل الدخول إلى صفحة الويب الرئيسية بتأثير انزلاق
+            document.getElementById("loginPage").style.transform = "translateY(-20px)";
+            document.getElementById("loginPage").style.opacity = "0";
+            setTimeout(() => {
+                document.getElementById("loginPage").style.display = "none";
+                document.getElementById("mainPage").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("mainPage").style.opacity = "1";
+                    document.getElementById("mainPage").style.transform = "translateY(0)";
+                }, 100);
+            }, 1000);
+        }
+
+        function showWithdrawSection() {
+            document.getElementById("depositSection").style.display = "none";
+            document.getElementById("withdrawSection").style.display = "block";
+        }
+
+        function showDepositSection() {
+            document.getElementById("withdrawSection").style.display = "none";
+            document.getElementById("depositSection").style.display = "block";
+        }
+
+        function confirmWithdraw() {
+            alert("تم السحب بنجاح!");
+        }
+
+        function confirmDeposit() {
+            alert("تم الإيداع بنجاح!");
+        }
+    </script>
+</body>
+</html>
